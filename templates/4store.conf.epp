@@ -1,0 +1,7 @@
+<%- |
+  String $fsnodes = 'localhost',
+| -%>
+
+[4s-boss]
+discovery = sole
+nodes = <%= $fsnodes %>

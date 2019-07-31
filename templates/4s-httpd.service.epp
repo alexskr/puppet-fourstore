@@ -1,0 +1,22 @@
+<%- |
+  Integer $port = 8080,
+  String $kb = 'ontologies_api',
+  Stdlib::Absolutepath $path = '/usr/local/bin',
+| -%>
+[Unit]
+Description=4s-httpd ontologies_api
+After=network.target 4s-backend.service
+Wants=4s-boss.service 4s-backend.service
+#Requires=4s-boss.service 4s-backend.service
+
+[Service]
+Type=simple
+ExecStart=<%= $path %>/4s-httpd -D -p <%= $port %> -s -1 -C <%= $kb %>
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=4s-httpd
+User=4store
+Group=4store
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,20 @@
+[Unit]
+Description=4s-backend for ontologies_api kb
+After=network.target 4s-boss.service
+Requires=4s-boss.service
+
+[Service]
+Type=oneshot
+ExecStartPre=/usr/bin/sleep 1
+ExecStart=/usr/local/bin/4s-admin start-stores ontologies_api
+ExecStartPost=/usr/local/bin/4s-admin list-stores
+ExecStop=/usr/local/bin/4s-admin --force stop-stores ontologies_api
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=4s-backend
+User=4store
+Group=4store
+RemainAfterExit=true
+
+[Install]
+WantedBy=multi-user.target 4s-httpd.service

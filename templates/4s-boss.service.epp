@@ -1,0 +1,19 @@
+<%- |
+  Stdlib::Absolutepath $path = '/usr/local/bin'
+| -%>
+[Unit]
+Description=4s-boss service
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=<%= $path %>/4s-boss -D
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=4s-boss
+User=4store
+Group=4store
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
