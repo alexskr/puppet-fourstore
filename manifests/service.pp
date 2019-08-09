@@ -60,6 +60,8 @@ class fourstore::service (
 
   file { '/etc/4store.conf':
     mode    => '0644',
-    content => epp ('fourstore/4store.conf.epp', {}),
+    content => epp ('fourstore/4store.conf.epp', {
+      fsnodes => $fsnodes
+    }),
   }
 }
