@@ -15,7 +15,8 @@ class fourstore::install(
   $raptor2_ver = '2.0.15',
   $rasqal_ver  = '0.9.33',
   $fsrepo      = 'https://github.com/ncbo/4store',
-  $fsrevision  = 'master'
+  $fsrevision  = 'master',
+  $data_dir    = '/srv/4store'
 ) {
 
   require librdf::rasqal
@@ -30,8 +31,8 @@ class fourstore::install(
   password_max_age => '-1',
   password_min_age => '-1',
   shell            => '/bin/bash',
-  #uid              => '70009',
-  #gid              => '70009',
+  #uid             => '70009',
+  #gid             => '70009',
 }
 # group { '4store':
 #   ensure => 'present',
@@ -53,7 +54,7 @@ class fourstore::install(
 }
 
   #data directory
-  file { [ '/srv/4store', '/srv/4store/data'] :
+  file { $data_dir :
     ensure => directory,
     owner  => '4store',
     group  => '4store',
@@ -85,7 +86,7 @@ class fourstore::install(
     owner  => 'root',
     group  => 'root',
     mode   => '0755',
-    source => 'puppet:///modules/fourstore/fixperms',
+    content => "chown -R 4store:4store ${data_dir}",
   }
 
   vcsrepo { '/usr/local/src/4store':
@@ -108,7 +109,7 @@ class fourstore::install(
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
-    source  => 'puppet:///modules/fourstore/make4store',
+    content  => epp('fourstore/make4store.epp', { 'data_dir' => $data_dir }),
     require => Vcsrepo['/usr/local/src/4store'],
   }
 
