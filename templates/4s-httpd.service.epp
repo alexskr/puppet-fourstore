@@ -6,8 +6,8 @@
 [Unit]
 Description=4s-httpd ontologies_api
 After=network.target 4s-backend.service
-Wants=4s-boss.service 4s-backend.service
-#Requires=4s-boss.service 4s-backend.service
+Wants=4s-boss.service
+Requires=4s-backend.service
 
 [Service]
 Type=simple
@@ -17,6 +17,8 @@ StandardError=syslog
 SyslogIdentifier=4s-httpd
 User=4store
 Group=4store
+Restart=always
+RestartSec=3
 
 [Install]
 WantedBy=multi-user.target

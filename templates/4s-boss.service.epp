@@ -8,6 +8,7 @@ After=network.target
 [Service]
 Type=simple
 ExecStart=<%= $path %>/4s-boss -D
+ExecStartPost=/bin/sleep 5
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=4s-boss
