@@ -12,7 +12,7 @@
 # Sample Usage:
 #
 class fourstore::service (
-  String  $fsnodes         = 'localhost',
+  String  $fsnodes         = '127.0.0.1',
   Integer $port            = 8080,
   Integer $log_rotate_days = 7,
 ){
