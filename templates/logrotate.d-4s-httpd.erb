@@ -1,13 +1,3 @@
-/var/log/4store/query-public_bioportal.log {
-    daily
-    copytruncate
-    notifempty
-    rotate   <%= @rotate %> 
-    compress
-    daily
-    missingok
-}
-
 /var/log/4store/query-*log {
     daily
     copytruncate
