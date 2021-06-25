@@ -1,6 +1,6 @@
 {
   "name": "alexskr-fourstore",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "alexskr",
   "summary": "Puppet 4store module used in OntoPortal",
   "license": "Apache-2.0",
@@ -12,15 +12,19 @@
     },
     {
       "name": "puppetlabs-vcsrepo",
-      "version_requirement": ">= 1.0.0 < 4.0.0"
+      "version_requirement": ">= 1.0.0 < 5.0.0"
+    },
+    {
+      "name": "puppetlabs-git",
+      "version_requirement": ">= 0.5.0 < 1.0.0"
     },
     {
       "name": "camptocamp-systemd",
-      "version_requirement": ">= 2.0.0 < 3.0.0"
+      "version_requirement": ">= 2.0.0 < 5.0.0"
     },
     {
       "name": "puppet-logrotate",
-      "version_requirement": ">= 2.0.0 < 4.0.0"
+      "version_requirement": ">= 2.0.0 < 6.0.0"
     }
   ],
   "operatingsystem_support": [
@@ -52,10 +56,10 @@
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 4.10.0 < 7.0.0"
+      "version_requirement": ">= 6.1.0 < 7.0.0"
     }
   ],
-  "pdk-version": "1.11.1",
-  "template-url": "pdk-default#1.11.1",
-  "template-ref": "1.11.1-0-g2ff8c24"
+  "pdk-version": "2.1.1",
+  "template-url": "pdk-default#2.1.1",
+  "template-ref": "tags/2.1.1-0-g03daa92"
 }
