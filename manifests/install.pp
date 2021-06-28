@@ -12,27 +12,14 @@
 # Sample Usage:
 #
 class fourstore::install(
-  String $fsrepo                 = 'https://github.com/ncbo/4store',
-  String $fsrevision             = 'master',
-  Stdlib::Absolutepath $data_dir = '/srv/4store'
+  String $fsrepo                 = $fourstore::fsrepo,
+  String $fsrevision             = $fourstore::fsrevision,
+  Stdlib::Absolutepath $data_dir = $fourstore::data_dir,
 ) {
 
   include git
   require fourstore::dependencies
   require librdf::rasqal
-
-  user { '4store':
-    ensure           => 'present',
-    system           => true,
-    comment          => '4Store Server',
-    home             => '/var/lib/4store',
-    password         => '!!',
-    password_max_age => '-1',
-    password_min_age => '-1',
-    shell            => '/bin/bash',
-    #uid             => '70009',
-    #gid             => '70009',
-  }
 
   #ulimits
   file { '/etc/security/limits.d/4store.conf':
@@ -43,14 +30,6 @@ class fourstore::install(
     source => 'puppet:///modules/fourstore/limits.d-4store.conf',
   }
 
-  #data directory
-  file { $data_dir :
-    ensure => directory,
-    owner  => '4store',
-    group  => '4store',
-    mode   => '0775',
-    before => File['/var/lib/4store']
-  }
 
   file { '/var/lib/4store':
     ensure => symlink,

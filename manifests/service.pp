@@ -13,8 +13,8 @@
 #
 class fourstore::service (
   String  $fsnodes         = '127.0.0.1',
-  Integer $port            = 8080,
-  Integer $log_rotate_days = 7,
+  Integer $port            = $fourstore::port,
+  Integer $log_rotate_days = $fourstore::log_rotate_days,
 ){
 
   systemd::unit_file { '4s-httpd.service':
