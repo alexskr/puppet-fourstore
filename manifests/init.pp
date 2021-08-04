@@ -16,10 +16,9 @@ class fourstore(
   String $fsrevision             = 'master',
   Stdlib::Absolutepath $data_dir = '/srv/4store',
   Stdlib::Port $port             = 8080,
-  $fsnodes                       = '127.0.0.1',
+  Stdlib::Host $fsnodes          = '127.0.0.1',
   Integer $log_rotate_days       = 7,
 ) {
-
   user { '4store':
     ensure           => 'present',
     system           => true,
@@ -37,7 +36,7 @@ class fourstore(
     owner  => '4store',
     group  => '4store',
     mode   => '0775',
-    before => File['/var/lib/4store']
+    before => File['/var/lib/4store'],
   }
 
   contain fourstore::install

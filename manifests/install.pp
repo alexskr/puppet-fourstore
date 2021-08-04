@@ -16,10 +16,7 @@ class fourstore::install(
   String $fsrevision             = $fourstore::fsrevision,
   Stdlib::Absolutepath $data_dir = $fourstore::data_dir,
 ) {
-
-  include git
   require fourstore::dependencies
-  require librdf::rasqal
 
   #ulimits
   file { '/etc/security/limits.d/4store.conf':
@@ -50,8 +47,7 @@ class fourstore::install(
     mode   => '0755',
   }
 
-  file {  '/usr/local/bin/4s-fixperms':
-    ensure  => present,
+  file { '/usr/local/bin/4s-fixperms':
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
@@ -65,8 +61,7 @@ class fourstore::install(
     revision => $fsrevision,
   }
 
-  file {  '/usr/local/bin/make4store':
-    ensure  => present,
+  file { '/usr/local/bin/make4store':
     owner   => 'root',
     group   => 'root',
     mode    => '0755',

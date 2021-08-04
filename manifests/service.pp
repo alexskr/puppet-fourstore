@@ -15,18 +15,16 @@ class fourstore::service (
   String  $fsnodes         = '127.0.0.1',
   Integer $port            = $fourstore::port,
   Integer $log_rotate_days = $fourstore::log_rotate_days,
-){
-
+) {
   systemd::unit_file { '4s-httpd.service':
     ensure  => present,
     content => epp ('fourstore/4s-httpd.service.epp', {
-      'port' => $port,
+        'port' => $port,
     }),
   }
   -> service { '4s-httpd':
     enable  => true,
   }
-
 
   systemd::unit_file { '4s-backend.service':
     ensure  => present,
@@ -43,7 +41,8 @@ class fourstore::service (
     }),
   }
   -> service { '4s-boss':
-    enable  => true,
+    ensure => 'running',
+    enable => true,
   }
   logrotate::rule { '4s-httpd':
     path         => '/var/log/4store/query-*log',
@@ -61,7 +60,7 @@ class fourstore::service (
   file { '/etc/4store.conf':
     mode    => '0644',
     content => epp ('fourstore/4store.conf.epp', {
-      fsnodes => $fsnodes
+        fsnodes => $fsnodes
     }),
   }
 }
